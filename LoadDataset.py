@@ -1,33 +1,6 @@
 import pandas as pd
 import numpy as np
 
-GatheredPatterns = pd.read_csv('제일/chosenPatternJeil.csv')
-GatheredPatterns.loc[:,'measure_dtm'] = pd.to_datetime(GatheredPatterns.loc[:,'measure_dtm'])
-normalData = GatheredPatterns.copy()
-temp_min = np.min(normalData.loc[:,'attribute_1_value'].values)
-temp_max = np.max(normalData.loc[:,'attribute_1_value'].values - temp_min)
-normalData.loc[:,'attribute_1_value'] = (normalData.loc[:,'attribute_1_value'] - temp_min) / temp_max
-trainTestSplitLength = int(normalData.shape[0]*0.6)
-trainValidSplitLength = int(trainTestSplitLength*0.6)
-train = normalData.iloc[:trainValidSplitLength,2:4].values
-valid = normalData.iloc[trainValidSplitLength : trainTestSplitLength, 2:4].values
-test = normalData.iloc[trainTestSplitLength:,2:4].values
-
-data = pd.read_csv('C:/Users/inhom/School/2024_1/2023연구재현/제일/101_1011_jeil.csv')
-data.loc[:,'measure_dtm'] = pd.to_datetime(data.loc[:,'measure_dtm'])
-datasample = data.iloc[:, 2:4].values
-min_data = np.min(datasample)
-max_data = np.max(datasample - min_data)
-datasample[:,0] = (datasample[:,0] - min_data) / max_data
-
-doorOpenedData = pd.read_csv('C:/Users/inhom/School/2024_1/2023연구재현/doorOpenedDataset.csv')
-doorOpenedData.loc[:,'measure_dtm'] = pd.to_datetime(doorOpenedData.loc[:,'measure_dtm'])
-doorOpenedData = doorOpenedData.replace("OFF", 0)
-doorOpenedData = doorOpenedData.replace("ON", 1)
-OpenedSample = doorOpenedData.iloc[:, 2:4].values
-min_door = np.min(OpenedSample)
-max_door = np.max(OpenedSample - min_data)
-OpenedSample[:,0] = (OpenedSample[:,0] - min_door) / max_door
 
 class LoadDataset:
 
