@@ -14,7 +14,7 @@ np.random.seed(seed_value)
 random.seed(seed_value)          
 tf.random.set_seed(seed_value)
 
-def get_modelLSTM(dataset):
+def get_model(dataset):
     model = keras.Sequential()
 
     model.add(keras.layers.LSTM(64, input_shape = (dataset.shape[1], number_of_features), activation = 'relu', return_sequences = True)) 
