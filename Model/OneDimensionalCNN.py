@@ -16,8 +16,6 @@ def get_model(window_size, numberOfFeatures):
     model = keras.Sequential()
 
     model.add(keras.layers.Conv1D(filters = 64, kernel_size = 3, padding='same', input_shape = (window_size, numberOfFeatures)))
-    # model.add(keras.layers.BatchNormalization())
-    # model.add(keras.layers.Activation('relu'))
     
     model.add(keras.layers.GRU(20, return_sequences = True))
     model.add(keras.layers.GRU(20, return_sequences = False))
