@@ -23,8 +23,7 @@ def update(frame_index):
     xdata.append(frame_index)
     ydata.append(data.loc[frame_index, 'attribute_1_value'])  # 인덱스로 직접 접근
     ln.set_data(xdata, ydata)
-    # 동적으로 x축 범위 조정
-    ax.set_xlim(max(0, frame_index - 30), frame_index + 30)
+    # ax.set_xlim(max(0, frame_index - 30), frame_index + 30)
     return ln,
 
 xdata, ydata = [], []
