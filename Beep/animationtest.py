@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 
-data = pd.read_csv('C:/Users/inhom/School/2024_1/2023연구재현/제일/101_1011_jeil.csv')
+data = pd.read_csv('')
 data['measure_dtm'] = pd.to_datetime(data['measure_dtm'])
 data.replace({"OFF": 0, "ON": 1}, inplace=True)
 
