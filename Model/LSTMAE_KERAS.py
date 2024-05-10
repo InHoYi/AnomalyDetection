@@ -28,10 +28,10 @@ def get_model(window_size, number_of_features):
 
     return model
 
-
-def train(model, train_X, set_epochs = None):
+def train(model, train_X, valid_X, set_epochs = None):
     model.compile(optimizer = 'adam', loss = 'mae', metrics = ['mae'])
     earlyStopping = EarlyStopping( monitor = 'val_loss', patience = 50, verbose = 1, restore_best_weights = True)
+    # history = model.fit(train_X, train_X, epochs = set_epochs, batch_size = 32, validation_data = (valid_X, valid_X), callbacks = [earlyStopping])
     history = model.fit(train_X, train_X, epochs = set_epochs, batch_size = 32, validation_split = 0.1, callbacks = [earlyStopping])
     return history
 
