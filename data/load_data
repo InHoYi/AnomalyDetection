@@ -27,7 +27,7 @@ def create_lstm_dataset(data, shuffle = None, window_size = None, number_of_feat
         end_ix = i + window_size
         if end_ix > len(data):
             break
-        seq_x, seq_y = data.iloc[i:end_ix, :], data.iloc[end_ix - 1, 0]
+        seq_x, seq_y = data.iloc[i:end_ix, :], data.iloc[end_ix, 0]
         X.append(seq_x)
         y.append(seq_y)
     X = np.array(X).reshape(-1, number_of_features, window_size)
