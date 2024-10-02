@@ -1,0 +1,38 @@
+import pandas as pd
+import numpy as np
+
+def extract_data(data, *column_names):
+    return data[list(column_names)]
+
+def column_min_value(data, column_name):
+    result = data[column_name].min()
+    return result
+
+def column_max_value(data, column_name):
+    result = data[column_name].max()
+    return result
+
+def train_test_split(data, train_ratio = None, valid_ratio = None): # 0.6 / 0.75
+    total_length = data.shape[0]
+    train_test_split = int(total_length * train_ratio)
+    train_valid_split = int(train_test_split * valid_ratio)
+    train = data[:train_valid_split]
+    valid = data[train_valid_split:train_test_split]
+    test = data[train_test_split:]
+    return train, valid, test
+
+def create_lstm_dataset(data, shuffle = None, window_size = None, number_of_features = None):
+    X, y = [], []
+    for i in range(data.shape[0] - window_size):
+        end_ix = i + window_size
+        if end_ix > len(data):
+            break
+        seq_x, seq_y = data.iloc[i:end_ix, :], data.iloc[end_ix - 1, 0]
+        X.append(seq_x)
+        y.append(seq_y)
+    X = np.array(X).reshape(-1, number_of_features, window_size)
+    y = np.array(y)
+    if shuffle:
+        indices = np.random.permutation(len(X))
+        X, y = X[indices], y[indices]
+    return X, y
